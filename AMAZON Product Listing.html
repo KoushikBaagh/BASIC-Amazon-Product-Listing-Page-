@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Listing Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #febd69; /* Amazon background color */
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      header img {
+        width: 150px;
+        height: auto;
+      }
+
+      .filters {
+        width: 100%;
+        max-width: 400px;
+        background-color: #426289;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .filters h2 {
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      #price-range {
+        width: 100%;
+      }
+
+      #price-value {
+        display: inline-block;
+        margin-left: 5px;
+        font-weight: bold;
+      }
+
+      .product-list {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .product-card {
+        width: calc(33.33% - 20px);
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .product-card img {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .product-card h3,
+      .product-card p {
+        padding: 10px;
+        margin: 0;
+      }
+
+      .product-card h3 {
+        font-size: 16px;
+        color: #333;
+      }
+
+      .product-card p {
+        font-size: 14px;
+        color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="amazon.jpg" alt="Amazon Logo" />
+    </header>
+    <div class="container">
+      <div class="filters">
+        <h2>Filters</h2>
+        <form id="filter-form">
+          <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category">
+              <option value="all">All</option>
+              <option value="electronics">Electronics</option>
+              <option value="clothing">Clothing</option>
+              <option value="books">Books</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="price-range">Price Range:</label>
+            <input
+              type="range"
+              id="price-range"
+              min="0"
+              max="100"
+              step="10"
+              value="0"
+            />
+            <span id="price-value">Rs 0</span>
+          </div>
+        </form>
+      </div>
+      <div class="product-list">
+        <div class="product-card electronics">
+          <img
+            src="data:image/jpeg;base64,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"
+            alt="Product 1"
+          />
+          <h3>Product 1</h3>
+          <p>Rs 50</p>
+        </div>
+        <div class="product-card clothing">
+          <img
+            src="https://img.freepik.com/free-photo/car-accessories-with-copy-space_23-2149030401.jpg"
+            alt="Product 2"
+          />
+          <h3>Product 2</h3>
+          <p>Rs 30</p>
+        </div>
+        <div class="product-card books">
+          <img
+            src="https://im.rediff.com/money/2018/mar/13frooti.jpg"
+            alt="Product 3"
+          />
+          <h3>Product 3</h3>
+          <p>Rs 20</p>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const priceRange = document.getElementById("price-range");
+        const priceValue = document.getElementById("price-value");
+
+        priceRange.addEventListener("input", function () {
+          priceValue.textContent = "Rs " + this.value;
+        });
+
+        const filterForm = document.getElementById("filter-form");
+        const productCards = document.querySelectorAll(".product-card");
+
+        filterForm.addEventListener("change", function () {
+          const category = document.getElementById("category").value;
+          const price = parseInt(priceRange.value);
+
+          productCards.forEach(function (card) {
+            const cardCategory =
+              card.classList.contains(category) || category === "all";
+            const cardPrice =
+              parseInt(card.querySelector("p").textContent.slice(1)) <= price;
+
+            if (cardCategory && cardPrice) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
